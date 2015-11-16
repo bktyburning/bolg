@@ -1,72 +1,1067 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>fullPage</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Description...">
+    <meta name="keywords" content="keyword1,keyword2,keyword3..">
+    <meta name="author" content="chriswang,396276123@qq.com">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="icon/css/icono.min.css">
+    <style type="text/css">
+    html {
+        -ms-touch-action: none;  /* 阻止windows Phone 的默认触摸事件 */
+    }
+    body,
+    div,
+    p,
+    ul,
+    li {
+    	margin: 0;
+    	padding: 0;
+    }
+    ul {
+        list-style: none;
+    }
+    body {
+    	width: 100%;
+        *cursor: default;
+    	overflow: hidden;
+    	font: 16px/1.5 "Microsoft YaHei",Helvetica,STHeiti STXihei,Microsoft JhengHei,Arial;
+    }
+    
+    #pageContain {
+    	overflow: hidden;
+    }
+    .page {
+    	display: none;
+    	width: 100%;
+    	height: 100%;
+    	overflow: hidden;
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    }
+    .contain {
+    	width: 100%;
+    	height: 100%;
+    	display: none;
+    	position: relative;
+    	z-index: 0;
+    }
+    .current .contain,.slide .contain {
+    	display: block;
+    }
+    .current {
+    	display: block;
+    	z-index: 1;
+    }
+    .slide {
+    	display: block;
+    	z-index: 2;
+    }
+    .swipe {
+        display: block;
+        z-index: 3;
+        transition-duration: 0ms !important;
+        -webkit-transition-duration: 0ms !important;
+    }
+    .page1 {
+    	background: url(images/0be5c18825fe48130bebba57f4b5377a.jpg);
+        background-size: 100%;
+    }
+    .page2 {
+    	background: url(images/page2_bg.jpg);
+        background-size: 100%;
+    }
+    .page3 {
+    	background: url(images/8dd1f2df69fbf434e6e281dfc5f47778.jpg);
+        background-size:100%; 
+    }
+    .page4 {
+    	background: url(images/photobg.jpg);
+        background-size: 100%;
+    }
+    .page5 {
+    	background: url(images/js_bg.jpg);
+        background-size: 100%;
+    }
+    .page6 {
+    	background: #22ffff;
+    }
+    #navBar {
+    	z-index: 3;
+    	position: absolute;
+        font-size: 0px;
+        line-height: 0;
+    	bottom: 10px;
+        text-align: center;
+        width: 200px;
+    	left: 50%;
+        margin-left: -100px;
+    }
+    #navBar .active {
+        background: #ccc;
+    }
+    #navBar li {
+        background: transparent;
+        border: 1px solid #ccc;
+        display: inline-block;
+        font-size: 0px;
+        margin: 0 4px;
+        *float: left;
+        *zoom:1;
+        cursor: pointer;
+        transition: all .7s ease;
+        border-radius: 50%;
+        line-height: 10px;
+        text-align: center;
+        width: 10px;
+        height: 10px;
+    }
+    #prev,#next {
+        z-index: 4;
+        text-align: center;
+        line-height: 40px;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: 50%;
+        cursor:pointer;
+        margin-top: -20px;
+    }
+    #prev {
+        left: 0
+    }
+    #next {
+        right: 0
+    }
+    .nav {
+        z-index: 5;
+        position: fixed;
+        _position:absolute;
+        background: #F8F8FF;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Bolg : my web">
+    }
+    .nav ul{
+        position: absolute;
+        right: 30px;
+        top: 0;
+    }
+    .nav li {
+        display: inline;
+        float: left;
+        margin: 0 12px;
+    }
+    .motto{
+        
+        width: 446px;
+        position: absolute;
+        left: 50%;
+        margin-left: -223px;
+        top: 0;
+        color: #fff;
+        font-size: 25px;
+        
+    }  
+    .motto em,.motto span{
+        -webkit-animation:dragTop .7s ease-in-out both;
+        -moz-animation:dragTop .7s ease-in-out both;
+        -ms-animation:dragTop .7s ease-in-out both;
+        animation:dragTop .7s ease-in-out both;
+    }
+    .motto em{
+        -webkit-animation-delay:1.3s;
+        -moz-animation-delay:1.3s;
+        -ms-animation-delay:1.3s;
+        animation-delay:1.3s;
+        font-size: 40px;
+        font-style: normal;
+    }
+    .motto span{
+        -webkit-animation-delay: .8s;
+        -moz-animation-delay:.8s;
+        -ms-animation-delay:.8s;
+        animation-delay:.8s;
+        
+        margin-left: 120px;
+    }
+    @keyframes dragTop {
+        0% {
+            opacity:0;
+            transform:translateY(-70px)
+        }
+        60% {
+            opacity:1;
+            transform:translateY(20px)
+        }
+        90% {
+            transform:translateY(-5px)
+        }
+        97% {
+            transform:translateY(-1px)
+        }
+        100% {
+            transform:translateY(0px)
+        }
+    }
+    @-webkit-keyframes dragTop {
+        0% {
+            opacity:0;
+            -webkit-transform:translateY(-70px)
+        }
+        60% {
+            opacity:1;
+            -webkit-transform:translateY(20px)
+        }
+        90% {
+            -webkit-transform:translateY(-5px)
+        }
+        97% {
+            -webkit-transform:translateY(-1px)
+        }
+        100% {
+            -webkit-transform:translateY(0px)
+        }
+    }
+    @-webkit-keyframes dragLeft {
+        0% {
+            opacity:0;
+            -webkit-transform:translateX(-140px)
+        }
+        60% {
+            opacity:1;
+            -webkit-transform:translateX(20px)
+        }
+        90% {
+            -webkit-transform:translateX(-5px)
+        }
+        97% {
+            -webkit-transform:translateX(-1px)
+        }
+        100% {
+            -webkit-transform:translateX(0px)
+        }
+    }
+    @-webkit-keyframes rotate{
+        0% {
+            -webkit-transform:rotateY(none);
+            opacity: 0
+        }
+        25% {
+            -webkit-transform:rotateY(90deg);
+            opacity: 1
+        }
+        50% {
+            -webkit-transform:rotateY(180deg)
+        }
+        75% {
+            -webkit-transform:rotateY(270deg)
+        }
+        99% {
+            -webkit-transform:rotateY(360deg)
+        }
+    }
+    @-webkit-keyframes dragRight {
+        rotateY(angle)
+        0% {
+            opacity:0;
+            -webkit-transform:translateX(140px)
+        }
+        60% {
+            opacity:1;
+            -webkit-transform:translateX(-20px)
+        }
+        90% {
+            -webkit-transform:translateX(5px)
+        }
+        97% {
+            -webkit-transform:translateX(1px)
+        }
+        100% {
+            -webkit-transform:translateX(0px)
+        }
+    }
+    @-webkit-keyframes slowView {
+        0% {
+            opacity:0;
+        }
+        60% {
+            opacity:0.6;
+        }
+        90% {
+            opacity:0.9;
+        }
+        100% {
+            opacity:1;
+        }
+    }
+    @-moz-keyframes dragTop {
+        0% {
+            opacity:0;
+            -moz-transform:translateY(-70px)
+        }
+        60% {
+            opacity:1;
+            -moz-transform:translateY(20px)
+        }
+        90% {
+            -moz-transform:translateY(-5px)
+        }
+        97% {
+            -moz-transform:translateY(-1px)
+        }
+        100% {
+            -moz-transform:translateY(0px)
+        }
+    }
+    @-ms-keyframes dragTop {
+        0% {
+            opacity:0;
+            -ms-transform:translateY(-70px)
+        }
+        60% {
+            opacity:1;
+            -ms-transform:translateY(20px)
+        }
+        90% {
+            -ms-transform:translateY(-5px)
+        }
+        97% {
+            -ms-transform:translateY(-1px)
+        }
+        100% {
+            -ms-transform:translateY(0px)
+        }
+    }
+    #photoW {position:relative; width:100%; height:400px;  margin:60px auto; overflow: hidden;background: rgba(225,225,225,.3)}
+    #photoW ul {position:absolute; height:170px; top:110px;z-index: 9999;opacity: 0;}
+    #photoW ul li {float:left; width:260px; height:179px; position:relative;}
+    #photoW ul li img {width:260px; height:179px;border: 5px solid #fff;}
+    #photoV {width: 100%;height: 36%;position: absolute;bottom: 0;left: 0;margin-left: 20px}
+    #photoV li{width: 225px;height: 127px; border: 5px solid #fff; margin: 0 40px;float: left;box-shadow: 5px 5px 1px #ccc;position: relative;font-size: 6px;overflow: hidden;font-style: normal;}
+    #photoV li img{width: 100%;height: 100%;}
+    #photoV li div {height:55px; width:100%; position:absolute; left:0; bottom:-80px; opacity:0; filter:alpha(opacity:0);}
+    #photoV li div .bg {height:55px; border-top:1px solid white; width:100%; background:black; position:absolute; left:0; top:0; opacity:0.6; filter:alpha(opacity:60); z-index:1;}
+    #photoV li div em {position:absolute; left:0; top:0; color:white; z-index:2;}
+    #photoV li h2 {padding:4px; font-family:'\65B0\5B8B\4F53', '\5B8B\4F53', Verdana; font-weight:bold;font-style: normal;}
+    #photoV li p {padding:4px; line-height:22px;}
+    .bgspan{width:100px;height: 60px;background :red no-repeat;z-index: 999;}
+    #photoW span{
+        display: inline-block;
+        -webkit-animation:dragLeft .7s ease-in-out both;
+        padding-left: 200px;
+        padding-top: 200px;
+        font-weight: bold;
+        font-family: 'MicrosoftYaHei';
+        color: #fff;
+    }
+    #photoW em{-webkit-animation:dragRight .7s ease-in-out both;margin-left: 700px;font-weight: bold;font-family: 'MicrosoftYaHei';color: #fff;display: inline-block;}
+    #photoW em{
+        -webkit-animation-delay:1.3s;
+        -moz-animation-delay:1.3s;
+        -ms-animation-delay:1.3s;
+        animation-delay:1.3s;
+        font-size: 60px;
+        font-style: normal;
+    }
+    #photoW span{
+        -webkit-animation-delay: .8s;
+        -moz-animation-delay:.8s;
+        -ms-animation-delay:.8s;
+        animation-delay:.8s;
+        font-size: 60px;
+        margin-left: 120px;
+    }
+    #logo_box{position: absolute;left: 540px;top: 50px;-webkit-animation:slowView .7s ease-in-out both;}
+    #logo_box{-webkit-animation-delay: .8s;}
+    #introduce{margin-top: 250px;margin-left: 100px;color: #99FF99;-webkit-animation:dragLeft .7s ease-in-out both;}
+    #introduce{
+        -webkit-animation-delay: .8s;
+        -moz-animation-delay:.8s;
+        -ms-animation-delay:.8s;
+        animation-delay:.8s;
+    }
+    #introduce h2{font-size: 40px;}
+    #introduce p{font-size: 20px;margin-top: 30px;}
+    #introduce a{display:inline-block;width: 150px;height: 150px;margin-top: 50px;margin-right: 50px;}
+    #introduce_2{height: 430px;width: 320px;position: absolute;right: 150px;top: -99px;overflow: hidden;border: 10px solid #fff;background: rgba(0,0,0,.5);border-radius: 15%;-webkit-animation:dragRight .7s ease-in-out both;}
+    #introduce_2{
+        -webkit-animation-delay: .8s;
+        -moz-animation-delay:.8s;
+        -ms-animation-delay:.8s;
+        animation-delay:.8s;
+    }
+    #introduce_2 li{height: 100px;width: 300px;color: #fff;text-align: center;line-height: 200px;font-size: 20px;}
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Bolg</title>
-  </head>
+    .production{width:992px; margin:30px auto;}
+    .production li{float:left; position:relative;width:200px; height:200px; line-height:200px; font-size:30px; text-align:center;background:#ccc; overflow:hidden; margin:15px;margin-top: 70px;}
+    .production li span{ position:absolute;left:-200px;top:0;width:200px; height:200px; background:#11a99b;color: #fff;}
+    #imglogo{position: absolute;top: -135px;left: 45px;-webkit-animation:rotate .7s ease-in-out both;}
+    #imglogo{-webkit-animation-delay: .8s;}
+    </style>
+</head>
+<!--[if lte IE 7]>      
+<body scroll="no"> 
+<![endif]-->
+<!--[if gt IE 7]><!--> 
+<body> 
+<!--<![endif]-->
+<div class="nav">
+    <ul id="tit_btn">
+        <li data-page="1">首页</li>
+        <li data-page="2">随笔</li>
+        <li data-page="3">作品</li>
+        <li data-page="4" id="pw">照片墙</li>
+        <li data-page="5">关于我</li>
+        
+    </ul>
+</div>
+	<div id="pageContain">
+		<div class="page page1 current">
+			<div class="contain">
+            <img src="images/home_logo2.gif" alt="" id="imglogo">
+				<div class="box">
 
-  <body>
+                    <div class="motto">
+                        <span>It's my motto:</span> <br/>
+                        <em>Everything is possible!</em>
+                    </div>
+                    <div class="link mission-link">
+                        <a class="button">
+                        <span class="line line-top"></span>
+                        <span class="line line-right"></span>
+                        <span class="line line-bottom"></span>
+                        <span class="line line-left"></span>
+                        HTML/CSS
+                        </a>
+                    </div>
+                    <div class="link play-link">
+                        <a class="button">
+                        <span class="line line-top"></span>
+                        <span class="line line-right"></span>
+                        <span class="line line-bottom"></span>
+                        <span class="line line-left"></span>
+                        原生JS
+                        </a>
+                    </div>
+                    <div class="link touch-link">
+                        <a class="button">
+                        <span class="line line-top"></span>
+                        <span class="line line-right"></span>
+                        <span class="line line-bottom"></span>
+                        <span class="line line-left"></span>
+                        jQuery
+                        </a>
+                    </div>
+                    <p class="tip"><em></em><span></span></p>
+                </div> 
+			</div>
+		</div>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/bktyburning/bolg">View on GitHub</a>
+		<div class="page page2">
+			<div class="contain">
+                <div id="top">
+                    <span id="send"></span>
+                </div>
+                <div id="main">
+                    
+                    
+                </div>                          
+                <div id="send-form">
+                    <p class="title"><span>许下你的愿望</span><a href="javascript:;" id="close"></a></p>
+                    <form action="" name="wish">
+                        <p>
+                            <label for="username">昵称：</label>
+                            <input type="text" name="username" id="username"/>
+                        </p>
+                        <p>
+                            <label for="content">愿望：(您还可以输入&nbsp;<span id="font-num">50</span>&nbsp;个字)</label>
+                            <textarea name="content" id="content"></textarea>
+                            <div id="phiz">
+                                <img src="./Images/phiz/zhuakuang.gif" alt="抓狂" />
+                                <img src="./Images/phiz/baobao.gif" alt="抱抱" />
+                                <img src="./Images/phiz/haixiu.gif" alt="害羞" />
+                                <img src="./Images/phiz/ku.gif" alt="酷" />
+                                <img src="./Images/phiz/xixi.gif" alt="嘻嘻" />
+                                <img src="./Images/phiz/taikaixin.gif" alt="太开心" />
+                                <img src="./Images/phiz/touxiao.gif" alt="偷笑" />
+                                <img src="./Images/phiz/qian.gif" alt="钱" />
+                                <img src="./Images/phiz/huaxin.gif" alt="花心" />
+                                <img src="./Images/phiz/jiyan.gif" alt="挤眼" />
+                            </div>
+                        </p>
+                        <span id="send-btn"></span>
+                    </form>
+                </div>
+			</div>
+		</div>
 
-          <h1 id="project_title">Bolg</h1>
-          <h2 id="project_tagline">my web</h2>
+		<div class="page page3">
+			<div class="contain">
+				<ul class="production">
+                    <li id="div1"><span>控制div属性</span></li>            
+                    <li id="div2"><span>简易年历</span></li>            
+                    <li id="div3"><span>联动、全选、复选</span></li>            
+                    <li id="div4"><span>超酷图片时钟</span></li>            
+                    <li id="div5"><span>星级评分</span></li>            
+                    <li id="div6"><span>json数据统计</span></li>            
+                    <li id="div7"><span>简单小游戏</span></li>            
+                    <li id="div8"><span>淘宝放大镜</span></li>            
+                </ul>
+                <ul class="production">
+                    <li id="div9"><span>键盘控制div移动</span></li>            
+                    <li id="div10"><span>手风琴效果</span></li>            
+                    <li id="div11"><span>花式图片切换</span></li>            
+                    <li id="div12"><span>path菜单</span></li>
+                </ul>
+			</div>
+		</div>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/bktyburning/bolg/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/bktyburning/bolg/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+		<div class="page page4">
+			<div class="contain">
+				<div id="photoW" >
+                    
+                    <ul>
+                        <li><img src="images/by/727615a4d3089d93b2ffe2ac068871d8.jpg" /></li>
+                        <li><img src="images/by/6dca736c6401be63616b69e8525ed0c1.jpg" /></li>
+                        <li><img src="images/by/19ebec8c2ed7c53bb5277caf4d34ad87.jpg" /></li>
+                        <li><img src="images/by/IMG_1378.jpg" /></li>
+                        <li><img src="images/by/IMG_0710.jpg" /></li>
+                        <li><img src="images/by/IMG_1571.jpg" /></li>
+                        <li><img src="images/by/IMG_0856.jpg" /></li>
+                        <li><img src="images/by/IMG_8936.jpg" /></li>
+                        <li><img src="images/by/IMG_0765.jpg" /></li>
+                        
+                    </ul>
+                    <ul>
+                        <li><img src="images/car/7bf5e63487257502d2c30bab16683d10.jpg" /></li>
+                        <li><img src="images/car/8deaf46239ac436d270b05c5193bf6d7.jpg" /></li>
+                        <li><img src="images/car/8e2edeecb20766d91a16ed51f2df356f.jpg" /></li>
+                        <li><img src="images/car/16c921ffe8a8db22d2f50c2a5bae9446.jpg" /></li>
+                        <li><img src="images/car/27d2521a7db61d6f5addd4cd94cdf08c.jpg" /></li>
+                        <li><img src="images/car/58db1dac40b45b84240fabddeae29135.jpg" /></li>
+                        <li><img src="images/car/73da866041aa7935b35691fa7fa42a02.jpg" /></li>
+                        <li><img src="images/car/90cff88051495e0db3dab4931ddfb469.jpg" /></li>
+                        <li><img src="images/car/3913b0d99ab24de51343e8ea235750f7.jpg" /></li>
+                        <li><img src="images/car/31216c7de75c8cc173cf0288fdb7bf15.jpg" /></li>
+                        
+                    </ul>
+                    <ul>
+                       <li><img src="images/dota/b93f5c73a49c118a23d3d4ab29b2d563.jpg" /></li>
+                       <li><img src="images/dota/c3026dd05789f7599fec817181ea082e.jpg" /></li>
+                       <li><img src="images/dota/7367a279b92b1476a4ed1ea586be8ad5.jpg" /></li>
+                       <li><img src="images/dota/3bd4d593cf811b3917bc8a647cdfb628.jpg" /></li>
+                       <li><img src="images/dota/8f42cbf3108fb2c87b003bbbd2800c1a.jpg" /></li>
+                       <li><img src="images/dota/069c2302110f0caec9c495d33ce14395.jpg" /></li>
+                       <li><img src="images/dota/c3026dd05789f7599fec817181ea082e.jpg" /></li>
+                       <li><img src="images/dota/3680967c2e12cdffc4a45e9f7b75ae13.jpg" /></li>
+                    </ul>
+                    <ul>
+                        <li><img src="images/gd/e94845460018923380e9d4bf0ac0869f.jpg" /></li>
+                        <li><img src="images/gd/gd2.jpeg" /></li>
+                        <li><img src="images/gd/gd3.jpeg" /></li>
+                        <li><img src="images/gd/gd10.jpeg" /></li>
+                        <li><img src="images/gd/gd4.jpeg" /></li>
+                        <li><img src="images/gd/gd5.jpeg" /></li>
+                        <li><img src="images/gd/gd6.jpeg" /></li>
+                        <li><img src="images/gd/gd7.jpeg" /></li>
+                        <li><img src="images/gd/gd8.jpeg" /></li>
+                        <li><img src="images/gd/gd9.jpeg" /></li>
+                    </ul>
+                   <div id='logo_box'><img src="images/logo3.gif" alt=""></div>>
+                        <span>"主淫"那么帅</span><br/>
+                        <em>我想去看看</em>
+                    </div>
+                <ol id='photoV'>
+                    <li>
+                        <img src="images/byj2.jpg" alt="photo_by">
+                        <div>
+                            <em>
+                                <h2>毕业：是一个离别的时刻</h2>
+                                <p>青春的片段，这些照片帮我们记录</p>
+                            </em>
+                            <span class="bg"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="images/photo_car.jpg" alt="photo_car">
+                        <div>
+                            <em>
+                                <h2>炫酷的跑车</h2>
+                                <p>我是一个酷爱速度的男人</p>
+                            </em>
+                            <span class="bg"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="images/photo_dota.jpg" alt="photo_dota">
+                        <div>
+                            <em>
+                                <h2>来吧，开黑么？？！</h2>
+                                <p>当一款游戏，变为信仰</p>
+                            </em>
+                            <span class="bg"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="images/photo_GD.jpg" alt="photo_GD">
+                        <div>
+                            <em>
+                                <h2>我为歌狂</h2>
+                                <p>听他歌的时候，你不知道自己是谁</p>
+                            </em>
+                            <span class="bg"></span>
+                        </div>
+                    </li>
+                </ol>
+			</div>
+		</div>
+        <div class="page page5">
+            <div class="contain">
+                <div id="introduce">
+                    <h2>汝欲招兵买马，鄙人方为良将</h2>
+                    <p>通过右侧电话邮箱，或者直接扫微信二维码联系我！</p>
+                    <a href="javascript:;"><img src="images/1_1.ico" alt=""></a>
+                    <!-- 20151112050516663_easyicon_net_256.ico -->
+                    <a href="javascript:;"><img src="images/2_1.ico" alt=""></a>
+                    <a href="javascript:;"><img src="images/3_1.ico" alt=""></a>
+                </div>
+                <ul id="introduce_2">
+                    <li>Tel:13818404007</li>
+                    <li>E-mail:bktyburning@163.com</li>
+                    <li>Wechat:ZWB_222</li>
+                </ul>
+            </div>
+        </div>
+	</div>
+	<!-- <ul id="navBar">
+        <li></li>
+        <li></li>
+        <li></li>
+             <li></li>
+    </ul> -->
+   
+<script type="text/javascript" src="js/fullPage.min.js"></script>
+<script src="js/jquery-1.8.3.min.js"></script>
+<!-- <script src="js/script.js"></script> -->
+<script src="js/ajax.js"></script>
+<script src="js/move.js"></script>
+<script src="js/domReady.js"></script>
+<script type="text/javascript">
+    //页面切换
+	var runPage;
+    runPage = new FullPage({
+    id: 'pageContain',
+    slideTime: 800,
+    effect: {
+        transform: {
+            translate: 'Y',
+            scale: [0, 1],
+        },
+        opacity: [0, 1]
+    },
+    mode: 'wheel, touch, nav:tit_btn',
+    easing: 'ease'
+    });
+    //page2 心情
+    function rnd(n,m){
+    return Math.floor(n+Math.random()*(m-n))    
+    }
+    window.onload=function(){
+        var oAddWish=document.getElementById('send');
+        var oLightBox=document.getElementById('send-form'); 
+        var oCloseLightBox=document.getElementById('close');    
+        var oSubmitLightBox=document.getElementById('send-btn');    
+        var oUserName=document.getElementById('username');  
+        var oContent=document.getElementById('content');
+        var oMain=document.getElementById('main');
+        var zIndex=2;
+        //显示lightBox
+        oAddWish.onclick=function(){
+            oLightBox.style.display='block';
+            oLightBox.style.left=(document.documentElement.clientWidth-oLightBox.offsetWidth)/2+'px';   
+            oLightBox.style.top=(document.documentElement.clientHeight-oLightBox.offsetHeight)/2+'px'; 
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        };
+        //隐藏LightBox
+        oCloseLightBox.onclick=function(){
+            oLightBox.style.display='none'; 
+            oUserName.value=oContent.value='';
+        };
+        oSubmitLightBox.onclick=function(){
+            oLightBox.style.display='none'; 
+            oUserName.value=oContent.value='';
+        }
+        //1.发表心情
+        oSubmitLightBox.onclick=function(){
+            //接口:wish.php?act=add&username=xxx&content=xxx
+            ajax({
+                url:    'wish.php',
+                data:   {act:'add', username:oUserName.value, content:oContent.value},
+                success:function(str){
+                    //ajax is over
+                    //DOM   {error:1, msg:xxx, id: 心愿ID, time: 1435567718}
+                    var json=eval('('+str+')');
+                    if(json.error==0){
+                        
+                        createMsg(json.id,oUserName.value,oContent.value,json.time);
+                        
+                        oLightBox.style.display='none';
+                        oUserName.value=oContent.value='';
+                    }else{
+                        alert(json.msg);    
+                    }
+                        
+                }
+            });
+        };
+        
+        //拖拽
+        function drag(dt,dl){
+            dt.onmousedown=function(ev){
+                var oEvt=ev||event;
+                var disX=oEvt.clientX-dl.offsetLeft;
+                var disY=oEvt.clientY-dl.offsetTop;
+                dl.style.opacity=0.5;
+                dl.style.zIndex=zIndex++;
+                document.onmousemove=function(ev){
+                    var oEvt=ev||event;
+                    dl.style.left=oEvt.clientX-disX+'px';
+                    dl.style.top=oEvt.clientY-disY+'px';
+                };
+                document.onmouseup=function(){
+                    dl.style.opacity=1;
+                    document.onmousemove=document.onmouseup=null;
+                };
+                
+                return false;
+            };
+        }
+        
+        //2.封装createMsg(id,username,content,time)
+        function createMsg(id,username,content,time){
+            //整理服务器时间
+            var d=new Date();
+            d.setTime(time*1000);
+            //创建dom
+            var oDl=document.createElement('dl');
+            oDl.className='paper a'+rnd(1,6);
+            oDl.innerHTML=
+    '<dt>\
+    <span class="username">'+username+'</span>\
+    <span class="num">'+id+'</span>\
+    </dt>\
+    <dd class="content">'+content+'</dd>\
+    <dd class="bottom">\
+    <span class="time">'+d.getHours()+':'+d.getMinutes()+'</span>\
+    <a href="javascript:;" class="close"></a>\
+    </dd>';
+            
+            //给删除添加事件
+            var oDel=oDl.getElementsByTagName('a')[0];
+            oDel.onclick=function(){
+                //接口    wish.php?act=delete&id=0;
+                if(confirm('确定要删除么?')){
+                    ajax({
+                        url:    'wish.php',
+                        data:   {act:'delete', id:id},
+                        success:function(str){
+                            //{error:1, msg:xxx}
+                            if(eval('('+str+')').error==0){
+                                main.removeChild(oDl);
+                                //alert(eval('('+str+')').msg);     
+                            }else{
+                                alert(eval('('+str+')').msg);   
+                            }
+                        }   
+                    });     
+                }
+            };
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here <a href="https://guides.github.com/features/mastering-markdown/">using GitHub Flavored Markdown</a>, select a template crafted by a designer, and publish. After your page is generated, you can check out the new <code>gh-pages</code> branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.</p>
+            oMain.appendChild(oDl);
+            
+            //随机oDl的位置
+            oDl.style.left=rnd(0,document.documentElement.clientWidth-oDl.offsetWidth)+'px';
+            oDl.style.top=rnd(0,document.documentElement.clientHeight-oDl.offsetHeight)+'px';
+            
+            //oDl拖拽
+            drag(oDl.children[0],oDl);  
+        }
+        
+        //3.获取心情    wish.php?act=get
+        ajax({
+            url:    'wish.php',
+            data:   {act:'get'},
+            success:function(str){
+                //{error:0, msg:[{'id':1, 'username':'xxx', 'content':'xxx', time: 1435567718},{},{},{}.......]}    
+                var json=eval('('+str+')');
+                if(json.error==0){
+                    //创建一堆oDl
+                    for(var i=0;i<json.msg.length;i++){
+                        createMsg(json.msg[i].id,json.msg[i].username,json.msg[i].content,json.msg[i].time);
+                    }
+                }else{
+                    alert(json.msg) 
+                }
+            }
+        });
+    };
+    //page4 
 
-<h3>
-<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We’ve crafted some handsome templates for you to use. Go ahead and click 'Continue to layouts' to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved.</p>
-
-<h3>
-<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating pages manually</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Bolg maintained by <a href="https://github.com/bktyburning">bktyburning</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+    // //图片拖动
+    // var oPhotoW=document.getElementById('photoW');
+    // var oUl=oPhotoW.children[0];
+    // var aLi=oUl.children;
 
     
+    
+    // //拖拽
+    
+    //照片目录效果
+    var oPhotoV=document.getElementById('photoV');
+    var aPL=oPhotoV.getElementsByTagName('li');
+    var oPhotoW=document.getElementById('photoW');
+    var aUlbody=oPhotoW.getElementsByTagName('ul');
+    
+    for(var i=0;i<aPL.length;i++){
+        aPL[i].onmouseover=function(){
+            var thisDiv=this.children[1];
+            move(thisDiv,{opacity:1,bottom:0},{time:500});
+        };  
+        aPL[i].onmouseout=function(){
+            var thisDiv=this.children[1];
+            move(thisDiv,{opacity:0,bottom:-81},{time:500});
+        };  
+    }
+    for (var i = 0; i < aPL.length; i++) {
+       (function(index){
+             aPL[i].onclick=function(){
+                for (var i = 0; i < aPL.length; i++) {
+                    // aPL[i].className='';
+                    aUlbody[i].style.zIndex=0;
+                    move(aUlbody[i],{opacity:0},{time:1000});
+                };
+                // this.className='active';
+                aUlbody[index].style.zIndex=1;
+                move(aUlbody[index],{opacity:1},{time:1000});
+                var oUl=oPhotoW.children[index];
+                var aLi=oUl.children;
+                oUl.onmousedown=function (ev){
+                    var oEvent=ev||event;
+                    
+                    var disX=oEvent.clientX-oUl.offsetLeft;
+                    aUlbody[index].style.width=aLi[0].offsetWidth*aLi.length+'px';
+                    
+                    document.onmousemove=function (ev)
+                    {
+                        var oEvent=ev||event;
+                        
+                        var l=oEvent.clientX-disX;
+                        if(l>oPhotoW.offsetWidth/2-(0+0.5)*aLi[0].offsetWidth){
+                            l=oPhotoW.offsetWidth/2-(0+0.5)*aLi[0].offsetWidth;
+                        }else if(l<oPhotoW.offsetWidth/2-(aLi.length-1+0.5)*aLi[0].offsetWidth){
+                            l=oPhotoW.offsetWidth/2-(aLi.length-1+0.5)*aLi[0].offsetWidth;
+                        }
 
-  </body>
+                        oUl.style.left=l+'px';
+                        
+                        setSize();
+                        
+                    };
+
+                    document.onmouseup=function ()
+                    {
+                        document.onmousemove=null;
+                        document.onmouseup=null;
+                        
+                        oUl.releaseCapture && oUl.releaseCapture();
+                    };
+                    
+                    oUl.setCapture && oUl.setCapture();
+                    return false;
+                };
+                function setSize(){
+                    for (var i = 0; i < aLi.length; i++) {
+                        var centerL=aLi[i].offsetLeft+oUl.offsetLeft+aLi[i].offsetWidth/2;
+                        var disCenter=Math.abs(oPhotoW.offsetWidth/2-centerL);
+
+                        var scale=1-disCenter/800;
+                        if(scale<0.5) scale=0.5;
+
+                        var oImg=aLi[i].children[0];
+          
+                        oImg.style.width=scale*260*2+'px';
+                        oImg.style.height=scale*179*2+'px';
+                        oImg.style.marginLeft=-(oImg.offsetWidth-260)/2+'px';
+                        oImg.style.marginTop=-(oImg.offsetHeight-179)/2+'px';
+                        aLi[i].style.opacity=scale;
+                        aLi[i].style.filter='alpha(opacity='+scale*100+')';
+
+                        aLi[i].style.zIndex=parseInt(scale*10000);
+                        
+                    };
+                }
+                function setCenter(n){
+                    oUl.style.left=oPhotoW.offsetWidth/2-(n+0.5)*aLi[0].offsetWidth+'px';
+                }
+                
+                setCenter(5);
+                setSize();            
+            }
+       })(i)
+    };
+    //page5
+    var oIntroduce=document.getElementById('introduce');
+    var aIcon=oIntroduce.getElementsByTagName('a');
+    for (var i = 0; i < aIcon.length; i++) {
+        (function(index){
+            aIcon[i].onclick=function(){
+                this.innerHTML='<img src="images/'+(index+1)+'_2.ico" alt="">';
+            }
+        })(i)
+    };
+    //page3
+    $(function(){
+    var oProduction = document.getElementsByClassName("production")[0];   
+    var aProductionLi = oProduction.children;
+    
+    for(var i = 0; i < aProductionLi.length; i++){
+        lagou(aProductionLi[i])
+    }
+    
+    function getDir(obj,oEvent){
+        var x = oEvent.clientX - obj.offsetLeft - obj.offsetWidth/2;
+        var y = obj.offsetTop + obj.offsetHeight/2 - oEvent.clientY;
+        
+        // n 0 左 1 下  2 右   3 上
+        return Math.round((Math.atan2(y,x)*180/Math.PI + 180)/90)%4;
+    }
+    
+    
+    function lagou(oDiv){
+        oDiv.onmouseover = function(ev){
+            var oEvent = ev || event;
+            var oFrom = oEvent.fromElement || oEvent.relatedTarget;
+            
+            if(oDiv.contains(oFrom)){
+                return ;
+            }
+            
+            var oSpan = this.children[0];
+            var n = getDir(this,oEvent);
+            
+            switch(n){
+                case 0:
+                    oSpan.style.left = "-150px";
+                    oSpan.style.top = "0";
+                    break;
+                case 1:
+                    oSpan.style.left = "0";
+                    oSpan.style.top = "150px";
+                    break;
+                case 2:
+                    oSpan.style.left = "150px";
+                    oSpan.style.top = "0";
+                    break;
+                case 3:
+                    oSpan.style.left = "0";
+                    oSpan.style.top = "-150px";
+                    break;
+            }
+            
+            move(oSpan,{left:0,top:0});
+        };
+        
+        oDiv.onmouseout = function(ev){
+            var oEvent = ev || event;
+            var oTo = oEvent.toElement || oEvent.relatedTarget;
+            
+            if(oDiv.contains(oTo)){
+                return ;
+            }
+            var oSpan = this.children[0];
+            var n = getDir(this,oEvent);
+            
+            switch(n){
+                case 0:
+                    move(oSpan,{left:-200,top:0});
+                    break;
+                case 1:
+                    move(oSpan,{left:0,top:200});
+                    break;
+                case 2:
+                    move(oSpan,{left:200,top:0});
+                    break;
+                case 3:
+                    move(oSpan,{left:0,top:-200});
+                    break;
+            }
+        };
+    }
+    
+    
+});
+
+//page3 页面跳转
+var oZpDiv1=document.getElementById('div1');
+var oZpDiv2=document.getElementById('div2');
+var oZpDiv3=document.getElementById('div3');
+var oZpDiv4=document.getElementById('div4');
+var oZpDiv5=document.getElementById('div5');
+var oZpDiv6=document.getElementById('div6');
+var oZpDiv7=document.getElementById('div7');
+var oZpDiv8=document.getElementById('div8');
+var oZpDiv9=document.getElementById('div9');
+var oZpDiv10=document.getElementById('div10');
+
+oZpDiv1.onclick=function(){
+     window.open('anli/changestyle.html')
+}
+oZpDiv2.onclick=function(){
+     window.open('anli/yeardate.html')
+}
+oZpDiv3.onclick=function(){
+     window.open('anli/allchoose.html')
+}
+oZpDiv4.onclick=function(){
+     window.open('anli/numberC/numberC.html')
+}
+oZpDiv5.onclick=function(){
+     window.open('anli/pingfen/pingfen.html')
+}
+oZpDiv6.onclick=function(){
+     window.open('anli/json.html')
+}
+oZpDiv7.onclick=function(){
+     window.open('anli/Xgame/Xgame.html')
+}
+oZpDiv8.onclick=function(){
+     window.open('anli/tmall/tmall.html')
+}
+</script>
+
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

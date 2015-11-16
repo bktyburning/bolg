@@ -1,0 +1,79 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="style/zns_style.css" rel="stylesheet" type="text/css" />
+</head>
+<script type="text/javascript">
+    window.onload=function(){
+        var aNum=document.getElementsByClassName('num');
+        var oNum2=document.getElementsByClassName('num2')[0];
+        var arr=['seven.png','one.png','two.png','three.png','four.png','five.png','six.png'];
+        function tick(){
+            var now=new Date();
+            var year=now.getFullYear();
+            year=fillZore(year);
+            var month=now.getMonth();
+            month=fillZore(month);
+            var date=now.getDate();
+            date=fillZore(date);
+            var hours=now.getHours();
+            hours=fillZore(hours);
+            var min=now.getMinutes();
+            min=fillZore(min);
+            var sec=now.getSeconds();
+            sec=fillZore(sec);
+
+
+            var s=year+month+date+hours+min+sec;
+
+            for (var i = 0; i<aNum.length; i++) {
+                aNum[i].src='images/'+s.charAt(i)+'.png'
+            };
+
+            var week=now.getDay();
+            // alert(week)
+            oNum2.src='images/'+arr[week]
+        }
+        tick();
+        setInterval(tick,1000)
+    }
+    function fillZore(n){
+        return n<10?'0'+n:''+n;
+    }
+</script>
+<body>
+
+<div id="clock" class="date">
+    <h2><img src="images/title.png" /></h2>
+    <div class="year">
+        <img class="num" src="images/0.png" alt="0" />
+        <img class="num" src="images/0.png" alt="0" />
+        <img class="num" src="images/0.png" alt="0" />
+        <img class="num" src="images/0.png" alt="0" />
+        <img src="images/year.png" alt="year" />
+        <img class="num" src="images/0.png" alt="0" />
+        <img class="num" src="images/0.png" alt="0" />
+        <img src="images/month.png" alt="month" />
+        <img class="num" src="images/0.png" alt="0" />
+        <img class="num" src="images/0.png" alt="0" />
+        <img src="images/seven.png" alt="seven" />
+    </div>
+    <div class="time">
+        <img class="num" src="images/0.png" alt="0" />
+        <img class="num" src="images/0.png" alt="0" />
+        <img src="images/sign.png" alt="sign" />
+        <img class="num" src="images/0.png" alt="0" />
+        <img class="num" src="images/0.png" alt="0" />
+        <img src="images/sign.png" alt="sign" />
+        <img class="num" src="images/0.png" alt="0" />
+        <img class="num" src="images/0.png" alt="0" />
+        <img class="pos2" src="images/week.png" alt="week" />
+        <img class="num2" src="images/one.png" alt="one" />
+    </div>
+    
+</div>
+
+</body>
+</html>

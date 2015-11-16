@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+*{ margin:0; padding:0; list-style:none; font-family: "微软雅黑","张海山锐线体简"}
+#div1{width:310px;height:310px; position:relative;margin-left:100px; }
+#mark{width:100px;height:100px;background:rgba(0,0,0,.3); position:absolute;left:0;top:0; display:none;}
+#div2{width:310px;height:310px; position:absolute;left:450px;top:0; overflow: hidden; display:none;}
+#div2 img{ position:absolute;left:0;top:0;}
+</style>
+</head>
+<script type="text/javascript">
+	window.onload=function(){
+		var oDiv1=document.getElementById('div1');
+		var oMark=document.getElementById('mark');
+		var oDiv2=document.getElementById('div2');
+		var oImg=document.getElementById('img');
+		oDiv1.onmouseover=function(){
+			oMark.style.display=oDiv2.style.display='block';
+		}
+		oDiv1.onmouseout=function(){
+			oMark.style.display=oDiv2.style.display='none'
+		}
+		oDiv1.onmousemove=function(ev){
+			var oEvt=ev || event;
+			var l=oEvt.clientX-oMark.offsetWidth/2-oDiv1.offsetLeft;
+			var t=oEvt.clientY-oMark.offsetHeight/2-oDiv1.offsetTop;
+			if (l<0) {l=0};
+			if (t<0) {t=0};
+			if (l>oDiv1.offsetWidth-oMark.offsetWidth) {
+				l=oDiv1.offsetWidth-oMark.offsetWidth
+			};
+			if (t>oDiv1.offsetHeight-oMark.offsetHeight) {
+				t=oDiv1.offsetHeight-oMark.offsetHeight
+			};
+			oMark.style.left=l+'px';
+			oMark.style.top=t+'px';
+			oImg.style.left=-(oMark.offsetLeft/(oDiv1.offsetWidth-oMark.offsetWidth))*(oImg.offsetWidth-oDiv2.offsetWidth)+'px';
+			oImg.style.top=-(oMark.offsetTop/(oDiv1.offsetHeight-oMark.offsetHeight))*(oImg.offsetHeight-oDiv2.offsetHeight)+'px';
+		}
+	}
+</script>
+<body>
+	<div id="div1">
+		<img src="img/m1.jpg">
+	    <div id="mark"></div>
+	</div>
+	<div id="div2">
+		<img src="img/b1.jpg" id="img">
+	</div>
+</body>
+</html>

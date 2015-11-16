@@ -1,0 +1,51 @@
+<!--
+智能社© - http://www.zhinengshe.com/
+
+微博：@北京智能社
+微信：zhi_neng_she
+
+最具深度的前端开发培训机构 HTML+CSS/JS/HTML5
+-->
+
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>智能社 - www.zhinengshe.com</title>
+<link href="zns_style.css" rel="stylesheet" type="text/css" />
+<script>
+window.onload=function(){
+	var aLi=document.getElementsByTagName('li');
+	
+	for(var i=0;i<aLi.length;i++){
+		aLi[i].index=i;
+		aLi[i].onmouseover=function(){
+			for(var i=0;i<aLi.length;i++){
+				if(i<=this.index){
+					aLi[i].style.backgroundPosition='0 -29px';	
+				}else{
+					aLi[i].style.backgroundPosition='0 0';	
+				}
+			}
+		};	
+		aLi[i].onclick=function(){
+			alert(this.index+1)
+		};
+	}
+};
+</script>
+</head>
+
+<body>
+<div id="pingfen">
+	<ul>
+    	<li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="智能社 - zhinengshe.com" />
+<meta name="copyright" content="智能社 - zhinengshe.com" />
+<title>智能社 - www.zhinengshe.com</title>
+<style>
+*{ margin:0; padding:0; list-style:none; font-family: "微软雅黑","张海山锐线体简"}
+#div1{border-top:#333 10px solid;}
+</style>
+<script>
+window.onload=function(){
+	var oCk=document.getElementById('ck');
+	var aIpt=document.getElementsByTagName('input');
+	oCk.onclick=function(){
+		for(var i=1;i<aIpt.length;i++){
+			aIpt[i].checked=oCk.checked;	
+		}
+	};
+	
+	// //联动
+	// //1.给aIpt添加点击
+	// 	//每次点击时
+	// 	//a.准备一个计数器=0;
+	// 	//b.循环所有的aIpt[i],发现一个true	,计数器就+1
+	// 	//c.算一算计数器有无到达峰值,到了,√，没到×
+	// for(var i=1;i<aIpt.length;i++){
+	// 	aIpt[i].onclick=function(){
+	// 		//每次点击时
+	// 		//a
+	// 		var result=0;
+			
+	// 		//b
+	// 		for(var i=1;i<aIpt.length;i++){
+	// 			if(aIpt[i].checked==true){
+	// 				result++;	
+	// 			}
+	// 		}
+			
+	// 		//c
+	// 		if(result==3){
+	// 			oCk.checked=true;	
+	// 		}else{
+	// 			oCk.checked=false;	
+	// 		}
+	// 	};	
+	// }
+};
+</script>
+</head>
+
+<body>
+
+<input type="checkbox" id="ck">
+
+
+
+<div id="div1">
+	<input type="checkbox" checked="true"><br>
+	<input type="checkbox"><br>
+	<input type="checkbox"><br>
+</div>
+
+
+</body>
+</html>
